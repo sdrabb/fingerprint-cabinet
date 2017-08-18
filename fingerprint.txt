@@ -1,2 +1,0 @@
-rsync --progress pi@95.245.36.41:/tmp/fingerprint.bmp /home/alb3rto/Scrivania/
-rsync --progress /home/alb3rto/Scrivania/Progetti/fingerprint-project/fingerprint.py pi@95.245.36.41:/home/pi/Desktop/
