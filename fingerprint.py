@@ -1,5 +1,7 @@
 import hashlib
 from pyfingerprint.pyfingerprint import PyFingerprint
+import RPi.GPIO as GPIO
+import time
 
 
 def init_sensor():
@@ -44,7 +46,7 @@ def search_finger(f):
         else:
             print('Found template at position #' + str(positionNumber))
             print('The accuracy score is: ' + str(accuracyScore))
-
+            toggle_relay(4)
         ## OPTIONAL stuff
         ##
 
@@ -110,6 +112,24 @@ def add_new_finger(f):
         print('Operation failed!')
         print('Exception message: ' + str(e))
         exit(1)
+
+
+
+def toggle_relay(number):
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(number, GPIO.OUT)
+    try:
+        GPIO.output(number, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(number, GPIO.HIGH)
+        print "OFF"
+
+    except KeyboardInterrupt:
+        print "exit"
+
+        # Reset GPIO settings
+        GPIO.cleanup()
+
 
 if __name__ == "__main__":
 
